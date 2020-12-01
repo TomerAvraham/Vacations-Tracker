@@ -1,7 +1,9 @@
 const router = require('express').Router()
 const Query = require('../helpers/mysql')
+const authenticateToken = require('../auth/verification')
 
-router.get('/all', async (req, res) => {
+router.get('/all', authenticateToken,  async (req, res) => {
+    console.log(req.user)
     const q = 'SELECT * FROM vacations'
     try {
         const vacations = await Query(q)
@@ -10,5 +12,7 @@ router.get('/all', async (req, res) => {
         res.status(500).json(err)
     }
 })
+
+
 
 module.exports = router
