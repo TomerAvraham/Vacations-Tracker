@@ -11,9 +11,9 @@ connection.connect(err => {
     console.log('MySQL connected')
 })
 
-const Query = (query) => {
+const Query = (query, ...values) => {
     return new Promise ((resolve, reject) => {
-        connection.query(query, (err, result) => {
+        connection.query(query, values, (err, result) => {
             if (err) {
                 reject(err)
             } else {

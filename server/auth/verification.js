@@ -10,4 +10,9 @@ const authenticateToken = (req, res, next) => {
      })
 }
 
-module.exports = authenticateToken
+const authenticateAdmin = (req, res, next) => {
+    if (!req.user.admin) return res.status(400).json('Admin only')
+    next()
+}
+
+module.exports = {authenticateToken, authenticateAdmin}

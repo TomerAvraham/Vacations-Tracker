@@ -10,6 +10,7 @@ app.use(cors())
 
 app.use('/auth', require('./auth/auth'))
 app.use('/vacations', require('./routes/vacations'))
+app.use('/followers', require('./routes/followers'))
 
 
 app.listen(port, () => console.log(`Server ${port} is live`))

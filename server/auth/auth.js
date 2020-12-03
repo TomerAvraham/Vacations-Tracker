@@ -6,9 +6,9 @@ const bcrypt = require('bcrypt');
 
 router.post('/login', async (req, res) => {
     const {userName, password} = req.body
-    const userName_q = `SELECT * FROM users where userName = "${userName}"`
+    const userName_q = `SELECT * FROM users where userName = ?`
     try {
-        const result = await Query(userName_q)
+        const result = await Query(userName_q, userName)
         if (!result.length) return res.status(400).json("Username  Incorrect")
         const user = result[0]
         if (await bcrypt.compare(password, user.password)) {
@@ -29,10 +29,10 @@ router.post('/register', async (req, res) => {
     try{
         const hashedPassword = await bcrypt.hash(password, 10)
         const addUser_q = `insert into users (firstName, lastName, userName, password)
-        values ("${firstName}", "${lastName}", "${userName}", "${hashedPassword}")`
+        values (?, ?, ?, ?)`
         const existUser = await Query(validUserName_q)
         if (existUser.length) return res.status(400).json('Username Already Exist')
-        await Query(addUser_q)
+        await Query(addUser_q, firstName, lastName, userName, hashedPassword)
         res.json('login now')
     }catch (err) {
         res.status(500).json(err)
