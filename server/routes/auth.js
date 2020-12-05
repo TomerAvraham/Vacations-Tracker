@@ -14,7 +14,7 @@ router.post('/login', async (req, res) => {
         if (await bcrypt.compare(password, user.password)) {
             delete user.password
             const accessToken = jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET)
-            res.json(accessToken)
+            res.json({accessToken})
         } else {
             res.status(400).json('Password Incorrect')  
         }

@@ -8,7 +8,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-app.use('/auth', require('./auth/auth'))
+app.use('/auth', require('./routes/auth'))
 app.use('/vacations', require('./routes/vacations'))
 app.use('/followers', require('./routes/followers'))
 
