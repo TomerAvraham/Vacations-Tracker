@@ -33,7 +33,7 @@ router.post('/register', async (req, res) => {
         const existUser = await Query(validUserName_q)
         if (existUser.length) return res.status(400).json('Username Already Exist')
         await Query(addUser_q, firstName, lastName, userName, hashedPassword)
-        res.json('login now')
+        res.json('User created successfully, login now')
     }catch (err) {
         res.status(500).json(err)
     }
