@@ -1,17 +1,22 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import HomePage from "./pages/HomePage/HomePage";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import LandingPage from "./components/pages/LandingPage/LandingPage";
+import LoginPage from "./components/pages/LoginPage/LoginPage";
+import RegisterPage from "./components/pages/RegisterPage/RegisterPage";
+import VacationsPage from "./components/pages/VacationsPage/VacationsPage";
+import Wrapper from "./components/Layout/Wrapper ";
 
 const App = () => {
   return (
     <div className="App">
-      <Switch>
-        <Route exact path="/login" component={LoginPage} />
-        <Route exact path="/register" component={RegisterPage} />
-        <Route exact path="/" component={HomePage} />
-      </Switch>
+      <Wrapper>
+        <Switch>
+          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/register" component={RegisterPage} />
+          <Route exact path="/vacations" component={VacationsPage} />
+        </Switch>
+      </Wrapper>
     </div>
   );
 };

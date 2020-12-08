@@ -3,11 +3,11 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
-const Header = () => {
+const Navbar = () => {
   return (
-    <div>
-      <AppBar position="static">
-        <Toolbar variant="dense">
+    <div className="navbar__container">
+      <AppBar className="navbar" position="static">
+        <Toolbar className="navbar__wrapper" variant="dense">
           <Typography variant="h6" color="inherit">
             Vacations
           </Typography>
@@ -17,4 +17,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Navbar;

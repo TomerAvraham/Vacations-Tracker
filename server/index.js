@@ -1,16 +1,15 @@
-require('./helpers/mysql')
-require('dotenv').config()
-const express = require('express')
-const cors = require('cors')
-const port = 1000
-const app = express()
+require("./utils/mysql");
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const app = express();
 
-app.use(express.json())
-app.use(cors())
+app.use(express.json());
+app.use(cors());
 
-app.use('/auth', require('./routes/auth'))
-app.use('/vacations', require('./routes/vacations'))
-app.use('/followers', require('./routes/followers'))
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/vacations", require("./routes/vacations"));
+app.use("/api/followers", require("./routes/followers"));
 
-
-app.listen(port, () => console.log(`Server ${port} is live`))
+const port = process.env.PORT || 5002;
+app.listen(port, () => console.log(`Running on http://localhost:${port}`));
