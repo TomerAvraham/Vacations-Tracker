@@ -1,40 +1,40 @@
 const router = require("express").Router();
 const jwt = require("jsonwebtoken");
-const Query = require("../utils/mysql");
+const Query = require("../mysql/index");
 const bcrypt = require("bcrypt");
-const validateAuth = require("../middleWares/validateAuth");
+const authRegister = require("../middleWares/authRegister");
 
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
   const username_q = `SELECT * FROM users where username = ?`;
   try {
     const result = await Query(username_q, username);
-    if (!result.length) return res.status(400).json("username  Incorrect");
     const user = result[0];
+    if (!user) return res.status(400).send({ message: "User not exist"});
     if (await bcrypt.compare(password, user.password)) {
       delete user.password;
       const accessToken = jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: "24h",
       });
-      res.status(200).json({ accessToken });
+      res.status(200).send({ accessToken, userInfo: user });
     } else {
-      res.status(400).json("Password Incorrect");
+      res.status(400).send({ message: "Password Incorrect" });
     }
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).send({ message: err.message });
   }
 });
 
-router.post("/register", validateAuth, async (req, res) => {
+router.post("/register", authRegister, async (req, res) => {
   const { firstName, lastName, username, password } = req.body;
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     const addUser_q = `insert into users (firstName, lastName, 
         username, password) values (?, ?, ?, ?)`;
     await Query(addUser_q, firstName, lastName, username, hashedPassword);
-    res.json("User created successfully, login now");
+    res.status(201).send({ message: "User created successfully, login now" });
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).send({ message: err.message });
   }
 });
 

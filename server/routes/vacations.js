@@ -1,9 +1,9 @@
 const router = require("express").Router();
-const Query = require("../utils/mysql");
-const authorize = require("../middleWares/authorize");
-const authorizeAdmin = require("../middleWares/authorizeAdmin");
+const Query = require("../mysql/index");
+const authJwt = require("../middleWares/authJwt");
+const authAdmin = require("../middleWares/authAdmin");
 
-router.get("/all", authorize, async (req, res) => {
+router.get("/all", authJwt, async (req, res) => {
   const vacation_q = `select vacations.id, vacations.description, vacations.destination,
     photoUrl, price, fromDate, toDate, 
     count(followerID) as followers
@@ -11,13 +11,13 @@ router.get("/all", authorize, async (req, res) => {
      group by vacations.id`;
   try {
     const vacations = await Query(vacation_q);
-    res.status(200).json(vacations);
+    res.status(200).send({vacations: vacations});
   } catch (err) {
-    res.status(400).json(err);
+    res.status(400).send({message: err.message});
   }
 });
 
-router.post("/add", authorizeAdmin, async (req, res) => {
+router.post("/add", authAdmin, async (req, res) => {
   const {
     description,
     destination,
@@ -38,13 +38,13 @@ router.post("/add", authorizeAdmin, async (req, res) => {
       fromDate,
       toDate
     );
-    res.sendStatus(201);
+    res.status(201).send({message: "Add vacation successfully"});
   } catch (err) {
-    res.status(400).json(err);
+    res.status(400).send({message: err.message});
   }
 });
 
-router.put("/edit/:id", authorizeAdmin, async (req, res) => {
+router.put("/edit/:id", authAdmin, async (req, res) => {
   const {
     description,
     destination,
@@ -66,20 +66,20 @@ router.put("/edit/:id", authorizeAdmin, async (req, res) => {
       fromDate,
       toDate
     );
-    res.sendStatus(204);
+    res.status(204).send({message: "Vacation edit successfully"});
   } catch (err) {
-    res.status(400).json(err);
+    res.status(400).send({message: err.message});
   }
 });
 
-router.delete("/delete/:id", authorizeAdmin, async (req, res) => {
+router.delete("/delete/:id", authAdmin, async (req, res) => {
   const { id } = req.params;
   const delete_q = `delete from vacations where id = ${id}`;
   try {
     await Query(delete_q);
-    res.sendStatus(204);
+    res.status(204).send({message: "Vacation deleted successfully"});
   } catch (err) {
-    res.status(400).json(err);
+    res.status(400).send({message: err.message});
   }
 });
 

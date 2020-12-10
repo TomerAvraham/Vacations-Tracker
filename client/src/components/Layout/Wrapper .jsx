@@ -4,7 +4,6 @@ import Footer from "./Footer";
 import "./Layout.css";
 
 const Wrapper = (props) => {
-  console.log(props);
   return (
     <div className="wrapper__container">
       <Navbar />

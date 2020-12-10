@@ -1,4 +1,4 @@
-require("./utils/mysql");
+require("./mysql/index");
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
