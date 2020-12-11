@@ -3,7 +3,7 @@
   width: 100%;
   position: relative;
   background-position: 50% 50%;
-  background-image: url("../../../images/loginBG.jpg");
+  background-image: url("../../../assets/loginBackGround.jpg");
 }
 
 .overlay {

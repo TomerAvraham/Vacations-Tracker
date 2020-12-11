@@ -3,7 +3,7 @@
   width: 100%;
   position: relative;
   background-position: 50% 50%;
-  background-image: url("../../../images/landingBackGround.jpg");
+  background-image: url("../../../assets/landingBackGround.jpg");
 }
 
 .overlay {
@@ -12,7 +12,7 @@
   width: 100%;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(0, 0, 0, 0.37);
   color: white;
   display: flex;
   align-items: center;

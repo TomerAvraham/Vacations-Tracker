@@ -16,11 +16,8 @@ const LoginPage = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { error, userInfo } = userLogin;
 
-  console.log(userLogin);
-
   useEffect(() => {
     if (userInfo) {
-      console.log("im here");
       history.push("/vacations");
     }
   }, [userInfo, history]);
@@ -30,7 +27,7 @@ const LoginPage = () => {
   };
 
   const handelSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     dispatch(login(formData));
   };
 
