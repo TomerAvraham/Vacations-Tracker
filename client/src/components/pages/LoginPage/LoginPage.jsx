@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./LoginPage.css";
 import TextField from "@material-ui/core/TextField";
+import Alert from "@material-ui/lab/Alert";
 import Button from "@material-ui/core/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../redux/actions/authActions";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({});
@@ -12,17 +13,17 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const user = useSelector((state) => state.auth);
-  // const { error, userInfo } = user
+  const userLogin = useSelector((state) => state.userLogin);
+  const { error, userInfo } = userLogin;
 
-  console.log(user);
+  console.log(userLogin);
 
   useEffect(() => {
-    if (user) {
+    if (userInfo) {
       console.log("im here");
       history.push("/vacations");
     }
-  }, [user, history]);
+  }, [userInfo, history]);
 
   const handelChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -35,25 +36,33 @@ const LoginPage = () => {
 
   return (
     <div className="login__container">
-      <form onSubmit={(e) => handelSubmit(e)} className="login__form">
-        <TextField
-          onChange={(e) => handelChange(e)}
-          name="username"
-          label="Username"
-          type="text"
-          required
-        />
-        <TextField
-          onChange={(e) => handelChange(e)}
-          name="password"
-          label="Password"
-          type="password"
-          required
-        />
-        <Button type="submit" variant="contained" color="primary">
-          SignIn
-        </Button>
-      </form>
+      <div className="overlay">
+        <form onSubmit={(e) => handelSubmit(e)} className="login__form">
+          <div className="login__alert">
+            {error && <Alert className="alert" severity="error">{error.message}</Alert>}
+          </div>
+          <TextField
+            onChange={(e) => handelChange(e)}
+            name="username"
+            label="Username"
+            type="text"
+            required
+          />
+          <TextField
+            onChange={(e) => handelChange(e)}
+            name="password"
+            label="Password"
+            type="password"
+            required
+          />
+          <Button type="submit" variant="contained" color="primary">
+            Sign In
+          </Button>
+
+          <p>Don't have account? <Link to="/register">Register</Link></p>
+        </form>
+
+      </div>
     </div>
   );
 };

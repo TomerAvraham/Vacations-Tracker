@@ -1,21 +1,34 @@
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import rootReducer from "./reducers/rootReducer.js";
+import { loginReducer, registerReducer } from "./reducers/authReducers";
+
+const reducer = combineReducers({
+  userLogin: loginReducer,
+  userRegister: registerReducer,
+});
+
+const userInfo = localStorage.getItem("userInfo")
+  ? JSON.stringify(localStorage.getItem("userInfo"))
+  : null;
+
+const accessToken = localStorage.getItem("accessToken")
+  ? JSON.stringify(localStorage.getItem("accessToken"))
+  : null;
 
 const initialState = {
   vacations: [],
-  auth: {
-    userInfo: null,
-    accessToken: JSON.stringify(localStorage.getItem("accessToken")),
+  userLogin: {
+    userInfo: userInfo,
+    accessToken: accessToken,
+    error: null,
   },
-  error: null,
 };
 
 const middleware = [thunk];
 
 const store = createStore(
-  rootReducer,
+  reducer,
   initialState,
   composeWithDevTools(applyMiddleware(...middleware))
 );
