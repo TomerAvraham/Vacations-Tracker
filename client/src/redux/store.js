@@ -2,12 +2,12 @@ import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { loginReducer, registerReducer } from "./reducers/authReducers";
-import { vacationReducer } from './reducers/vacationsReducer'
+import { vacationReducer } from "./reducers/vacationsReducer";
 
 const reducer = combineReducers({
   userLogin: loginReducer,
   userRegister: registerReducer,
-  vacations: vacationReducer
+  vacationsList: vacationReducer,
 });
 
 const userInfo = localStorage.getItem("userInfo")
@@ -19,10 +19,13 @@ const accessToken = localStorage.getItem("accessToken")
   : null;
 
 const initialState = {
-  vacations: [],
+  vacationsList: {
+    vacations: [],
+    error: null,
+  },
   userLogin: {
-    userInfo: userInfo,
     accessToken: accessToken,
+    userInfo: userInfo,
     error: null,
   },
 };

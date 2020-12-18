@@ -9,7 +9,7 @@ const authJWT = (req, res, next) => {
     if (err) {
       return res.status(401).send({ message: "Unauthorized" });
     }
-    req.userId = decoded.user.id;
+    req.user = decoded.user;
     next();
   });
 };

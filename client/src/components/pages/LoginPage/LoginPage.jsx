@@ -27,7 +27,7 @@ const LoginPage = () => {
   };
 
   const handelSubmit = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     dispatch(login(formData));
   };
 

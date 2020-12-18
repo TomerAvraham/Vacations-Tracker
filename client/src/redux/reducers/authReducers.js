@@ -11,7 +11,8 @@ export const loginReducer = (state = {}, action) => {
   switch (type) {
     case LOGIN_SUCCESS:
       return {
-        userInfo: payload,
+        userInfo: payload.userInfo,
+        accessToken: payload.accessToken,
       };
     case LOGIN_FAIL:
       return {

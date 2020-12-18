@@ -2,7 +2,7 @@ const Query = require("../mysql/index");
 
 const authRegister = async (req, res, next) => {
   const { username, lastName, firstName, password } = req.body;
-  const validUserName_q = `SELECT userName FROM users WHERE userName = ?`;
+  const validUserName_q = `SELECT username FROM users WHERE username = ?`;
   if (!lastName) {
     return res.status(400).send({message: "Last name is require"});
   }

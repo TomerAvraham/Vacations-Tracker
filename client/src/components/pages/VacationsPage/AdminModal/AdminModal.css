@@ -1,0 +1,17 @@
+.modal {
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal__container {
+  width: 70%;
+  height: 75%;
+  max-width: 700px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+}

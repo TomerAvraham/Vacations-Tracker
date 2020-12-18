@@ -72,3 +72,9 @@ export const register = (user) => async (dispatch) => {
     })
   }
 }
+
+export const logout = () => {
+  localStorage.removeItem('userInfo')
+  localStorage.removeItem('accessToken')
+  document.location.href = '/login'
+} 
