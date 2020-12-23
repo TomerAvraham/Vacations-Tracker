@@ -1,0 +1,40 @@
+.login__container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background-position: 50% 50%;
+  background-image: url("../../assets/loginBackGround.jpg");
+}
+
+.overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.65);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.login__form {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  width: 400px;
+  height: 600px;
+  border: black 1px solid;
+}
+
+.login__alert {
+  width: 70%;
+  height: 40px;
+}
+
+.alert {
+  background: none;
+}

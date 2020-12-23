@@ -22,7 +22,7 @@
 }
 
 .navbar__logo > span {
-  color: var(--main-first-color)
+  color: var(--main-first-color);
 }
 
 .navbar__elements {
@@ -44,12 +44,12 @@
 
 .navbar__link {
   text-decoration: none;
-  color: var(--main-first-color);
+  color: black;
 }
 
 .navbar__link :hover {
   text-decoration: none;
-  color: black;
+  color: blue;
 }
 
 .navbar__links > li {
@@ -60,6 +60,5 @@
 }
 
 .navbar__links > li :hover {
-  color: black;
   font-size: 1.3rem;
 }

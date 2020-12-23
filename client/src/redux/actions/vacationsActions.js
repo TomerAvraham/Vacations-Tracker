@@ -3,6 +3,7 @@ import {
   SET_VACATIONS_SUCCESS,
   ADD_VACATION,
   DELETE_VACATION,
+  EDIT_VACATION,
 } from "./types";
 import { configHeaders } from "../../helpers/configHeaders";
 
@@ -58,6 +59,8 @@ export const addVacation = ({
 
     const data = await res.json();
 
+    console.log(data);
+
     dispatch({
       type: ADD_VACATION,
       payload: data.newVacation,
@@ -76,11 +79,40 @@ export const deleteVacation = (id) => async (dispatch) => {
 
     const data = await res.json();
 
-    console.log(data);
-
     dispatch({
       type: DELETE_VACATION,
-      payload: data.deletedVacationId
+      payload: Number(data.deletedVacationId),
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const editVacation = (
+  id,
+  { description, destination, photoUrl, price, fromDate, toDate }
+) => async (dispatch) => {
+  try {
+    const res = await fetch(API_URL + `edit/${id}`, {
+      method: "PUT",
+      headers: configHeaders(),
+      body: JSON.stringify({
+        description,
+        destination,
+        photoUrl,
+        price,
+        fromDate,
+        toDate,
+      }),
+    });
+
+    const data = await res.json();
+
+    console.log(data.editVacation);
+
+    dispatch({
+      type: EDIT_VACATION,
+      payload: data.editVacation,
     });
   } catch (err) {
     console.log(err);

@@ -1,0 +1,39 @@
+.card__container {
+  min-width: 200px;
+  max-width: 400px;
+  margin: 16px 16px;
+  padding-bottom: 10px;
+}
+
+.card__image {
+  width: 100%;
+  height: 150px;
+}
+
+.card__actions {
+  width: 90%;
+  padding-right: 30px;
+}
+
+.user__controllers {
+  display: flex;
+  width: 70%;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  padding: 0 8px;
+}
+
+.like__icon {
+  color: red;
+}
+
+.dislike__icon {
+  color: black;
+}
+
+.collapse {
+  z-index: 9999;
+  background-color: #fff;
+  color: black;
+}

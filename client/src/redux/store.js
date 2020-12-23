@@ -3,11 +3,13 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { loginReducer, registerReducer } from "./reducers/authReducers";
 import { vacationReducer } from "./reducers/vacationsReducer";
+import { followersReducer } from "./reducers/followersReducer";
 
 const reducer = combineReducers({
   userLogin: loginReducer,
   userRegister: registerReducer,
   vacationsList: vacationReducer,
+  vacationsFollowers: followersReducer,
 });
 
 const userInfo = localStorage.getItem("userInfo")

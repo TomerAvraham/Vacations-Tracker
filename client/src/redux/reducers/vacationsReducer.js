@@ -3,6 +3,9 @@ import {
   SET_VACATIONS_SUCCESS,
   ADD_VACATION,
   DELETE_VACATION,
+  EDIT_VACATION,
+  FOLLOW_VACATION,
+  UNFOLLOW_VACATION,
 } from "../actions/types";
 
 export const vacationReducer = (state = {}, action) => {
@@ -19,18 +22,58 @@ export const vacationReducer = (state = {}, action) => {
         error: payload,
       };
 
+    case FOLLOW_VACATION:
+      const followIndex = state.vacations.findIndex(
+        (v) => v.id === Number(payload)
+      );
+      state.vacations[followIndex] = {
+        ...state.vacations[followIndex],
+        isUserFollow: true,
+      };
+      state.vacations[followIndex].followers++;
+      state.vacations
+        .sort(function (x, y) {
+          return x.isUserFollow - y.isUserFollow;
+        })
+        .reverse();
+      return { ...state };
+
+    case UNFOLLOW_VACATION:
+      const unfollowIndex = state.vacations.findIndex(
+        (v) => v.id === Number(payload)
+      );
+      state.vacations[unfollowIndex] = {
+        ...state.vacations[unfollowIndex],
+        isUserFollow: false,
+      };
+      state.vacations[unfollowIndex].followers--;
+      state.vacations
+        .sort(function (x, y) {
+          return x.isUserFollow - y.isUserFollow;
+        })
+        .reverse();
+      return { ...state };
+
     case ADD_VACATION:
-      console.log(state.vacations);
-      console.log(payload);
+      const newVacations = state.vacations;
+      newVacations.push(payload);
       return {
-        vacations: state.vacations.push(payload),
+        vacations: newVacations,
       };
 
     case DELETE_VACATION:
-      console.log(state.vacations);
+      const afterDelete = state.vacations.filter((v) => v.id !== payload);
       return {
-        ...state,
-        vacations: state.vacations.filter((v) => v.id !== payload),
+        vacations: afterDelete,
+      };
+
+    case EDIT_VACATION:
+      const editVacationIndex = state.vacations.findIndex(
+        (v) => v.id === payload.id
+      );
+      state.vacations[editVacationIndex] = payload;
+      return {
+        vacations: state.vacations,
       };
 
     default:
