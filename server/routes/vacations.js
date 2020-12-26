@@ -86,7 +86,7 @@ router.put("/edit/:id", authAdmin, async (req, res) => {
     toDate,
   } = req.body;
   const { id } = req.params;
-  const editVacation_q = `update vacations set description = ?, destination = ?, photoUrl = ?, fromDate = "${fromDate}", 
+  const editVacation_q = `update vacations set description = ?, destination = ?, photoUrl = ?, price=?, fromDate = "${fromDate}", 
     toDate = "${toDate}" where vacations.id = ${id}`;
   try {
     await Query(editVacation_q, description, destination, photoUrl, price);

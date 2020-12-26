@@ -95,7 +95,7 @@ const AdminModal = ({ open, handleClose, vacation = initialState }) => {
             required
           />
         </div>
-        <Button type="submit" variant="contained" color="primary">
+        <Button type="submit" variant="contained" id="modal__btn">
           {vacation === initialState ? "Add" : "Edit"}
         </Button>
       </form>

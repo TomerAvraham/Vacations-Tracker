@@ -67,18 +67,6 @@ const VacationItem = ({ vacation }) => {
     }
   };
 
-  // const date = format(new Date(), "dd/mm/yyy");
-
-  // const bbdate = new Date(fromDate);
-
-  // console.log(bbdate.getDate());
-
-  // const formatFromDate = format(new Date(fromDate), "mm/dd/yyyy");
-  // const formatToDate = format(new Date(toDate), "mm/dd/yyyy");
-
-  // console.log(formatFromDate);
-  // console.log(formatToDate);
-
   return (
     <div>
       <Card className="card__container">
@@ -88,10 +76,10 @@ const VacationItem = ({ vacation }) => {
           title={`${destination} Photo's`}
         />
         <CardContent>
-          <Typography variant="body2" color="textSecondary" component="h4">
+          <Typography variant="h6" color="textSecondary">
             {destination}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography color="textSecondary" variant="p">
             From: {fromDate}
             <br />
             To: {toDate}
@@ -116,9 +104,9 @@ const VacationItem = ({ vacation }) => {
           unmountOnExit
         >
           <CardContent>
-            <Typography variant="p">{vacation.description}</Typography>
+            <Typography variant="p">{description}</Typography>
             <br />
-            <Typography variant="p">price: {vacation.price}$</Typography>
+            <Typography variant="h6">price: {price}$</Typography>
           </CardContent>
         </Collapse>
       </Card>

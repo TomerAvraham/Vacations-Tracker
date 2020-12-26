@@ -33,33 +33,36 @@ const LoginPage = () => {
 
   return (
     <div className="login__container">
-      <div className="overlay">
-        <form onSubmit={(e) => handelSubmit(e)} className="login__form">
-          <div className="login__alert">
-            {error && <Alert className="alert" severity="error">{error.message}</Alert>}
-          </div>
-          <TextField
-            onChange={(e) => handelChange(e)}
-            name="username"
-            label="Username"
-            type="text"
-            required
-          />
-          <TextField
-            onChange={(e) => handelChange(e)}
-            name="password"
-            label="Password"
-            type="password"
-            required
-          />
-          <Button type="submit" variant="contained" color="primary">
-            Sign In
-          </Button>
+      <form onSubmit={(e) => handelSubmit(e)} className="login__form">
+        <div className="login__alert">
+          {error && (
+            <Alert className="alert" severity="error">
+              {error.message}
+            </Alert>
+          )}
+        </div>
+        <TextField
+          onChange={(e) => handelChange(e)}
+          name="username"
+          label="Username"
+          type="text"
+          required
+        />
+        <TextField
+          onChange={(e) => handelChange(e)}
+          name="password"
+          label="Password"
+          type="password"
+          required
+        />
+        <Button id="login__btn" className type="submit" variant="contained">
+          SIGN IN
+        </Button>
 
-          <p>Don't have account? <Link to="/register">Register</Link></p>
-        </form>
-
-      </div>
+        <p>
+          Don't have account? <Link to="/register">Register</Link>
+        </p>
+      </form>
     </div>
   );
 };

@@ -5,4 +5,27 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  background-image: linear-gradient(
+    to left top,
+    #2ecc71,
+    #2dc66e,
+    #2bc06a,
+    #2abb67,
+    #29b564,
+    #24b468,
+    #20b36c,
+    #1cb270,
+    #14b57c,
+    #10b787,
+    #12ba92,
+    #1abc9c
+  );
+}
+
+.chart__container {
+  width: 70%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

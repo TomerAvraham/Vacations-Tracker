@@ -31,28 +31,13 @@ const Navbar = () => {
         </li>,
         <li onClick={logout}>Logout</li>,
       ];
-    } else {
-      return [
-        <li>
-          <Link className="navbar__link" to="/login">
-            login
-          </Link>
-        </li>,
-        <li>
-          <Link className="navbar__link" to="/register">
-            register
-          </Link>
-        </li>,
-      ];
     }
   };
 
   return (
     <AppBar id="navbar" elevation={0}>
       <Toolbar className="navbar__wrapper">
-        <h1 className="navbar__logo">
-          My<span>Logo.</span>
-        </h1>
+        <h1 className="navbar__logo">I-Travel</h1>
         <div className="navbar__elements">
           <ul className="navbar__links">{renderLinks()}</ul>
         </div>

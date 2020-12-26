@@ -15,3 +15,11 @@
   justify-content: space-around;
   flex-direction: column;
 }
+
+#modal__btn {
+  background-color: var(--second-color);
+  color: #ffffff;
+  width: 100%;
+  max-width: 200px;
+  border-radius: 30px;
+}

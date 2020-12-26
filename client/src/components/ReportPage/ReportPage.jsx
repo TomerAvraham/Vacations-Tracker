@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import {
   BarChart,
   CartesianGrid,
@@ -17,6 +18,8 @@ const ReportPage = () => {
   const dispatch = useDispatch();
 
   const vacationsFollowers = useSelector((state) => state.vacationsFollowers);
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   useEffect(() => {
     dispatch(fetchAllFollowers());
@@ -24,15 +27,18 @@ const ReportPage = () => {
 
   return (
     <div className="report__container">
-      <h1>reports</h1>
-      <BarChart width={730} height={250} data={vacationsFollowers}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="followers" fill="#82ca9d" />
-      </BarChart>
+      {userInfo === null && <Redirect to="/login" />}
+      <h1>Reports</h1>
+      <div className="chart__container">
+        <BarChart width={730} height={250} data={vacationsFollowers}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis type="number" />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="followers" fill="#82ca9d" />
+        </BarChart>
+      </div>
     </div>
   );
 };

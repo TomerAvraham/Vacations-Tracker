@@ -3,15 +3,75 @@
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+.form__wrapper {
+  height: 100%;
+  background-color: var(--white-color);
+  flex-grow: 4;
+  display: flex;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
 }
 
+.side__container {
+  background-image: url("../../assets/background-green-color.jpg");
+  background-size: fill;
+  background-repeat: no-repeat;
+  flex-grow: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.side__inner {
+  color: #ffffff;
+  width: 100%;
+  height: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
 .register__form {
-  width: 400px;
-  height: 500px;
   display: flex;
   align-items: center;
   justify-content: space-around;
   flex-direction: column;
+  height: 50%;
+}
+
+.register__form > button {
+  color: white;
+  background: var(--first-color);
+  border-radius: 35px;
+  height: 40px;
+  width: 70%;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.register__form > button:hover {
+  color: black;
+  background-color: none;
+}
+
+.form__inputs {
+  border-radius: 70px;
+}
+
+.link {
+  text-decoration: none;
+  max-width: 100%;
+}
+
+#side__btn {
+  color: var(--white-color);
+  border-radius: 35px;
+  width: 200px;
+  min-width: 100px;
+  border: 2px solid var(--white-color);
 }

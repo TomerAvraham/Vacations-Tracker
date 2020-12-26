@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { fetchVacations } from "../../redux/actions/vacationsActions";
 import "./VacationsPage.css";
 import Grid from "@material-ui/core/Grid";
@@ -27,6 +28,8 @@ const VacationsPage = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  console.log(userInfo);
+
   useEffect(() => {
     dispatch(fetchVacations());
   }, []);
@@ -34,14 +37,10 @@ const VacationsPage = () => {
   return (
     <>
       <div className="fab">
-        {userInfo.admin ? (
+        {userInfo === null && <Redirect to="/login" />}
+        {userInfo?.admin ? (
           <>
-            <Fab
-              onClick={handleOpen}
-              className="fab"
-              color="primary"
-              aria-label="add"
-            >
+            <Fab onClick={handleOpen} className="fab" aria-label="add">
               <AddIcon />
             </Fab>
             <AdminModal handleClose={handleClose} open={open} />

@@ -29,6 +29,7 @@ export const fetchVacations = () => async (dispatch) => {
       payload: data,
     });
   } catch (err) {
+    console.log(err)
     dispatch({
       type: SET_VACATIONS_FAIL,
     });

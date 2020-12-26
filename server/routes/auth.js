@@ -10,13 +10,20 @@ router.post("/login", async (req, res) => {
   try {
     const result = await Query(username_q, username);
     const user = result[0];
-    if (!user) return res.status(400).send({ message: "User doesn't exist"});
+    if (!user) return res.status(400).send({ message: "User doesn't exist" });
     if (await bcrypt.compare(password, user.password)) {
       delete user.password;
       const accessToken = jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: "24h",
+        expiresIn: "1min",
       });
-      res.status(200).send({ accessToken, userInfo: user });
+      const refreshToken = jwt.sign(
+        { userId: user.id },
+        process.env.REFRESH_TOKEN_SECRET,
+        {
+          expiresIn: "100d",
+        }
+      );
+      res.status(200).send({ accessToken, refreshToken, userInfo: user });
     } else {
       res.status(400).send({ message: "Incorrect password " });
     }
@@ -37,5 +44,9 @@ router.post("/register", authRegister, async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 });
+
+router.post('/token', (req, res) => {
+  const { refreshToken } = req.body
+})
 
 module.exports = router;

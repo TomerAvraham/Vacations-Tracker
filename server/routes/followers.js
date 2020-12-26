@@ -34,7 +34,8 @@ router.get("/all", authJwt, async (req, res) => {
   group by vacations.id`;
   try {
     const vacationByFollowers = await Query(query);
-    res.status(200).send({ data: vacationByFollowers });
+    const filterVacations = vacationByFollowers.filter((v) => v.followers);
+    res.status(200).send({ data: filterVacations });
   } catch (err) {
     res.status(400).send({ error: err.message });
   }
