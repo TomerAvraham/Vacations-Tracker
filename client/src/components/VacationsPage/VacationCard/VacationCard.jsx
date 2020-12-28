@@ -39,7 +39,7 @@ const VacationItem = ({ vacation }) => {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  const { admin } = userInfo;
+  const { admin } = userInfo?.user;
 
   const {
     id,

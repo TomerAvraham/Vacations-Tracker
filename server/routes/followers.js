@@ -31,7 +31,7 @@ router.get("/all", authJwt, async (req, res) => {
   const query = `select vacations.destination as name,
   count(followerID) as followers from vacations 
   LEFT join followers on vacations.id = followers.vacationID
-  group by vacations.id`;
+  group by vacations.id order by followers DESC`;
   try {
     const vacationByFollowers = await Query(query);
     const filterVacations = vacationByFollowers.filter((v) => v.followers);

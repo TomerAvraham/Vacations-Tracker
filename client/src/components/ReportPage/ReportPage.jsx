@@ -25,15 +25,17 @@ const ReportPage = () => {
     dispatch(fetchAllFollowers());
   }, []);
 
+  console.log(vacationsFollowers[0])
+
   return (
     <div className="report__container">
-      {userInfo === null && <Redirect to="/login" />}
+      {!userInfo.user.admin && <Redirect to="/login" />}
       <h1>Reports</h1>
       <div className="chart__container">
-        <BarChart width={730} height={250} data={vacationsFollowers}>
+        <BarChart width={600} height={300} data={vacationsFollowers}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
-          <YAxis type="number" />
+          <YAxis type="number" domain={[0, vacationsFollowers[0]?.followers + 2]} />
           <Tooltip />
           <Legend />
           <Bar dataKey="followers" fill="#82ca9d" />

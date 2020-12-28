@@ -4,7 +4,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 // import Typography from "@material-ui/core/Typography";
 import { useSelector } from "react-redux";
 import { logout } from "../../redux/actions/authActions";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -12,24 +12,27 @@ const Navbar = () => {
   const { userInfo } = userLogin;
 
   const renderLinks = () => {
-    if (userInfo && !userInfo.admin) {
+    if (userInfo && !userInfo.user.admin) {
       return [
-        <li onClick={logout}>Logout</li>,
-        <li>hi {userInfo.username}</li>,
+        <li onClick={logout}>
+          <p>Logout</p>
+        </li>,
       ];
-    } else if (userInfo && userInfo.admin) {
+    } else if (userInfo && userInfo.user.admin) {
       return [
         <li>
-          <Link className="navbar__link" to="/vacations">
+          <NavLink className="navbar__link" to="/vacations">
             vacations
-          </Link>
+          </NavLink>
         </li>,
         <li>
-          <Link className="navbar__link" to="/report">
+          <NavLink className="navbar__link" to="/report">
             report
-          </Link>
+          </NavLink>
         </li>,
-        <li onClick={logout}>Logout</li>,
+        <li onClick={logout}>
+          <p>Logout</p>
+        </li>,
       ];
     }
   };

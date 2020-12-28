@@ -4,6 +4,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { loginReducer, registerReducer } from "./reducers/authReducers";
 import { vacationReducer } from "./reducers/vacationsReducer";
 import { followersReducer } from "./reducers/followersReducer";
+import jwt_decode from "jwt-decode";
 
 const reducer = combineReducers({
   userLogin: loginReducer,
@@ -12,12 +13,16 @@ const reducer = combineReducers({
   vacationsFollowers: followersReducer,
 });
 
-const userInfo = localStorage.getItem("userInfo")
-  ? JSON.parse(localStorage.getItem("userInfo"))
+const userInfo = localStorage.getItem("accessToken")
+  ? jwt_decode(JSON.parse(localStorage.getItem("accessToken")))
   : null;
 
 const accessToken = localStorage.getItem("accessToken")
   ? JSON.parse(localStorage.getItem("accessToken"))
+  : null;
+
+const refreshToken = localStorage.getItem("refreshToken")
+  ? JSON.parse(localStorage.getItem("refreshToken"))
   : null;
 
 const initialState = {
@@ -27,17 +32,18 @@ const initialState = {
   },
   userLogin: {
     accessToken: accessToken,
+    refreshToken: refreshToken,
     userInfo: userInfo,
     error: null,
   },
 };
 
-const middleware = [thunk];
+const middleware = applyMiddleware(thunk);
 
 const store = createStore(
   reducer,
   initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
+  composeWithDevTools(middleware)
 );
 
 export default store;

@@ -69,7 +69,6 @@ router.post("/add", authAdmin, async (req, res) => {
       fromDate: moment(newestVacation[0].fromDate).format("YYYY-MM-DD"),
       toDate: moment(newestVacation[0].toDate).format("YYYY-MM-DD"),
     };
-    console.log(newestVacation[0]);
     res.status(201).send({ newVacation: newestVacation[0] });
   } catch (err) {
     res.status(400).send({ message: err.message });

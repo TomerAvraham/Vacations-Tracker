@@ -40,21 +40,24 @@
 
 .navbar__link {
   text-decoration: none;
-  color: black;
-}
-
-.navbar__link :hover {
-  text-decoration: none;
-  color: blue;
+  color: var(--white-color);
 }
 
 .navbar__links > li {
   padding: 8px 10px;
-  color: black;
+  color: var(--white-color);
   font-size: 1.3rem;
   cursor: pointer;
 }
 
-.navbar__links > li :hover {
+.navbar__link > li :hover {
   font-size: 1.3rem;
+  color: var(--second-color);
+  border-bottom: 2px solid var(--second-color);
+}
+
+.active {
+  font-size: 1.3rem;
+  color: var(--second-color);
+  border-bottom: 2px solid var(--second-color);
 }

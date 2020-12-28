@@ -1,4 +1,10 @@
-import { LOGIN_FAIL, LOGIN_SUCCESS, REGISTER_FAIL, REGISTER_SUCCESS } from "./types";
+import {
+  LOGIN_FAIL,
+  LOGIN_SUCCESS,
+  REGISTER_FAIL,
+  REGISTER_SUCCESS,
+  GET_TOKEN,
+} from "./types";
 
 const API_URL = "http://localhost:5000/api/auth/";
 
@@ -19,10 +25,10 @@ export const login = ({ username, password }) => async (dispatch) => {
         payload: data,
       });
     }
-    const { accessToken, userInfo } = data;
+    const { accessToken, refreshToken } = data;
 
-    localStorage.setItem("userInfo", JSON.stringify(userInfo));
     localStorage.setItem("accessToken", JSON.stringify(accessToken));
+    localStorage.setItem("refreshToken", JSON.stringify(refreshToken));
 
     dispatch({
       type: LOGIN_SUCCESS,
@@ -37,10 +43,10 @@ export const login = ({ username, password }) => async (dispatch) => {
 };
 
 export const register = (user) => async (dispatch) => {
-  const { username, lastName, firstName, password } = user
+  const { username, lastName, firstName, password } = user;
   try {
-    const res = await fetch(API_URL + 'register', {
-      method: 'POST',
+    const res = await fetch(API_URL + "register", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -48,33 +54,55 @@ export const register = (user) => async (dispatch) => {
         username,
         lastName,
         firstName,
-        password
-      })
-    })
+        password,
+      }),
+    });
 
-    const data = await res.json()
+    const data = await res.json();
 
     if (res.status >= 400) {
       return dispatch({
         type: REGISTER_FAIL,
-        payload: data
-      })
+        payload: data,
+      });
     } else {
       return dispatch({
         type: REGISTER_SUCCESS,
-        payload: data
-      })
+        payload: data,
+      });
     }
   } catch (err) {
     dispatch({
       type: REGISTER_FAIL,
-      payload: err.message
-    })
+      payload: err.message,
+    });
   }
-}
+};
+
+export const getAccessToken = (refreshToken) => async (dispatch) => {
+  console.log(refreshToken);
+  try {
+    const res = await fetch(API_URL + "token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ refreshToken: refreshToken }),
+    });
+    const data = await res.json();
+    console.log(data);
+
+    dispatch({
+      type: GET_TOKEN,
+      payload: data.accessToken,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const logout = () => {
-  localStorage.removeItem('userInfo')
-  localStorage.removeItem('accessToken')
-  document.location.href = '/login'
-} 
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+  document.location.href = "/login";
+};

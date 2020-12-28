@@ -1,12 +1,12 @@
 @media (max-width: 960px) {
   .vacations__container {
-    padding-top: 390px !important;
+    padding-top: 190px !important;
   }
 }
 
 @media (max-width: 600px) {
   .vacations__container {
-    padding-top: 900px !important;
+    padding-top: 730px !important;
   }
 }
 
@@ -17,21 +17,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(
-    to bottom,
-    #2d3436,
-    #4e5457,
-    #71777a,
-    #979b9f,
-    #bec1c5,
-    #cfd2d6,
-    #e0e3e7,
-    #f2f5f8,
-    #f0f4f6,
-    #eff3f5,
-    #edf1f3,
-    #ecf0f1
-  );
+  background: linear-gradient(rgb(65, 41, 90), rgb(47, 7, 67));
 }
 
 #fab {
