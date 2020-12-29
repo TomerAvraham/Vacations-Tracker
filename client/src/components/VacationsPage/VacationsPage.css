@@ -1,19 +1,18 @@
 @media (max-width: 960px) {
   .vacations__container {
-    padding-top: 190px !important;
+    padding-top: 20px !important;
   }
 }
 
 @media (max-width: 600px) {
   .vacations__container {
-    padding-top: 730px !important;
+    padding-top: 200px !important;
   }
 }
 
 .vacations__container {
   width: 100%;
   height: 100%;
-  padding-top: 150px;
   display: flex;
   align-items: center;
   justify-content: center;

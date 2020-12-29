@@ -1,7 +1,7 @@
 import { FOLLOW_VACATION, UNFOLLOW_VACATION, SET_FOLLOWERS } from "./types";
 import { configHeaders } from "../../helpers/configHeaders";
 
-const API_URL = "http://localhost:5000/api/followers/";
+const API_URL = "https://vacations-server-heroku.herokuapp.com/api/followers/";
 
 export const followVacation = (vacationId) => async (dispatch) => {
   try {
@@ -15,7 +15,7 @@ export const followVacation = (vacationId) => async (dispatch) => {
       payload: vacationId,
     });
   } catch (err) {
-    console.error(err);
+    if (err) throw err;
   }
 };
 
@@ -30,7 +30,7 @@ export const unFollowVacation = (vacationId) => async (dispatch) => {
       payload: vacationId,
     });
   } catch (err) {
-    console.error(err);
+    if (err) throw err;
   }
 };
 
@@ -46,6 +46,6 @@ export const fetchAllFollowers = () => async (dispatch) => {
       payload: data.data,
     });
   } catch (err) {
-    console.log(err);
+    if (err) throw err;
   }
 };

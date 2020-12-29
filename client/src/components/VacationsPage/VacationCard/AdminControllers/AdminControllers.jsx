@@ -26,10 +26,10 @@ const AdminControllers = ({ vacation }) => {
   return (
     <div className="admin__controllers">
       <IconButton onClick={handelDeleteVacation}>
-        <DeleteIcon />
+        <DeleteIcon style={{ fontSize: "35px", color: " #27ae60" }} />
       </IconButton>
       <IconButton onClick={handleOpen}>
-        <EditIcon />
+        <EditIcon style={{ fontSize: "35px", color: " #27ae60" }} />
       </IconButton>
       <AdminModal vacation={vacation} open={open} handleClose={handleClose} />
     </div>

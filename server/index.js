@@ -11,5 +11,5 @@ app.use("/api/auth", require("./routes/auth"));
 app.use("/api/vacations", require("./routes/vacations"));
 app.use("/api/followers", require("./routes/followers"));
 
-const port = process.env.PORT || 5002;
-app.listen(port, () => console.log(`Running on http://localhost:${port}`));
+const PORT = process.env.PORT || 5001;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

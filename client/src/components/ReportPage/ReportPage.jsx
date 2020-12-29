@@ -25,7 +25,6 @@ const ReportPage = () => {
     dispatch(fetchAllFollowers());
   }, []);
 
-  console.log(vacationsFollowers[0])
 
   return (
     <div className="report__container">

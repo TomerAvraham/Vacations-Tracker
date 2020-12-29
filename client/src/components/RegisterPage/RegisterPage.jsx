@@ -27,7 +27,10 @@ const RegisterPage = () => {
     <div className="register__container">
       <div className="side__container">
         <div className="side__inner">
-          <h1>Welcome Back!</h1>
+          <h1>
+            Welcome{" "}
+            {message && message.includes("success") ? formData.username : ""}!
+          </h1>
           <p>To keep on track our awesome vacations </p>
           <Link className="link" to="/login">
             <Button id="side__btn">SIGN IN</Button>

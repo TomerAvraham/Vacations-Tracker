@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const jwt = require("jsonwebtoken");
 const Query = require("../mysql/index");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const authRegister = require("../middleWares/authRegister");
 
 router.post("/login", async (req, res) => {

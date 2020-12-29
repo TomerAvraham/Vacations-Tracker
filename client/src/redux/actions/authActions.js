@@ -6,7 +6,7 @@ import {
   GET_TOKEN,
 } from "./types";
 
-const API_URL = "http://localhost:5000/api/auth/";
+const API_URL = "https://vacations-server-heroku.herokuapp.com/api/auth/";
 
 export const login = ({ username, password }) => async (dispatch) => {
   try {
@@ -14,6 +14,7 @@ export const login = ({ username, password }) => async (dispatch) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'Accept': 'application/json'
       },
       body: JSON.stringify({ username, password }),
     });
@@ -35,7 +36,8 @@ export const login = ({ username, password }) => async (dispatch) => {
       payload: data,
       error: null,
     });
-  } catch {
+  } catch (err) {
+    if (err) throw err;
     dispatch({
       type: LOGIN_FAIL,
     });
@@ -49,6 +51,7 @@ export const register = (user) => async (dispatch) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'Accept': 'application/json'
       },
       body: JSON.stringify({
         username,
@@ -72,6 +75,7 @@ export const register = (user) => async (dispatch) => {
       });
     }
   } catch (err) {
+    if (err) throw err;
     dispatch({
       type: REGISTER_FAIL,
       payload: err.message,
@@ -80,24 +84,23 @@ export const register = (user) => async (dispatch) => {
 };
 
 export const getAccessToken = (refreshToken) => async (dispatch) => {
-  console.log(refreshToken);
   try {
     const res = await fetch(API_URL + "token", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'Accept': 'application/json'
       },
       body: JSON.stringify({ refreshToken: refreshToken }),
     });
     const data = await res.json();
-    console.log(data);
 
     dispatch({
       type: GET_TOKEN,
       payload: data.accessToken,
     });
   } catch (err) {
-    console.log(err);
+    if (err) throw err;
   }
 };
 

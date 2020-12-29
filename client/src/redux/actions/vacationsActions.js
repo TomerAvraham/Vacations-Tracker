@@ -7,7 +7,7 @@ import {
 } from "./types";
 import { configHeaders } from "../../helpers/configHeaders";
 
-const API_URL = "http://localhost:5000/api/vacations/";
+const API_URL = "https://vacations-server-heroku.herokuapp.com/api/vacations/";
 
 export const fetchVacations = () => async (dispatch) => {
   try {
@@ -29,7 +29,7 @@ export const fetchVacations = () => async (dispatch) => {
       payload: data,
     });
   } catch (err) {
-    console.log(err)
+    if (err) throw err;
     dispatch({
       type: SET_VACATIONS_FAIL,
     });
@@ -60,14 +60,12 @@ export const addVacation = ({
 
     const data = await res.json();
 
-    console.log(data);
-
     dispatch({
       type: ADD_VACATION,
       payload: data.newVacation,
     });
   } catch (err) {
-    console.log(err);
+    if (err) throw err;
   }
 };
 
@@ -85,7 +83,7 @@ export const deleteVacation = (id) => async (dispatch) => {
       payload: Number(data.deletedVacationId),
     });
   } catch (err) {
-    console.log(err);
+    if (err) throw err;
   }
 };
 
@@ -109,13 +107,11 @@ export const editVacation = (
 
     const data = await res.json();
 
-    console.log(data.editVacation);
-
     dispatch({
       type: EDIT_VACATION,
       payload: data.editVacation,
     });
   } catch (err) {
-    console.log(err);
+    if (err) throw err;
   }
 };

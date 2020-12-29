@@ -24,11 +24,11 @@ const UserControllers = ({ followers, isUserFollow, vacationId }) => {
       <div className="user__controllers">
         {isUserFollow ? (
           <IconButton onClick={handelUnFollow}>
-            <FavoriteIcon style={{ fontSize: "35px" }} />
+            <FavoriteIcon style={{ fontSize: "35px", color: ' #27ae60' }} />
           </IconButton>
         ) : (
           <IconButton onClick={handelFollow}>
-            <FavoriteBorderIcon style={{ fontSize: "35px" }} />
+            <FavoriteBorderIcon style={{ fontSize: "35px", color: ' #27ae60' }} />
           </IconButton>
         )}
         <p>Followers: {followers}</p>
