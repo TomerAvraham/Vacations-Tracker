@@ -23,7 +23,6 @@ export const loginReducer = (state = {}, action) => {
         error: payload,
       };
     case GET_TOKEN:
-      console.log(payload);
       const newUserInfo = jwt_decode(payload);
       localStorage.setItem("accessToken", JSON.stringify(payload));
       return {

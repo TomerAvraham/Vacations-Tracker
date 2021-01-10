@@ -47,7 +47,7 @@ const VacationsPage = () => {
         )}
       </div>
       <div className="vacations__container">
-        <Grid container justify="center">
+        <Grid className="grid" container justify="center">
           {vacations &&
             vacations.map((vacation, i) => (
               <Grid key={i} item xl={2} lg={3} md={4} sm={6} xs={12}>

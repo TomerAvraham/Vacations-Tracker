@@ -16,17 +16,12 @@ const App = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  const refresh = () => {
-    setTimeout(function () {
-      window.location.reload();
-    }, 100);
-  };
-
   useEffect(() => {
     if (userInfo !== null) {
       if (new Date(userInfo.exp * 1000) <= new Date()) {
-        dispatch(getAccessToken(refreshToken));
-        refresh();
+        if (refreshToken) {
+          dispatch(getAccessToken(refreshToken));
+        }
       }
     }
   }, [dispatch]);
